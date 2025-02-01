@@ -234,14 +234,14 @@ const TaskManager = () => {
                 exportData();
                 closeMobileMenu();
               }}
-              className="px-4 py-2 rounded-lg border-2 border-gray-500 text-gray-500 dark:text-gray-400 bg-transparent cursor-pointer flex items-center w-full hover:bg-gray-50 dark:hover:bg-gray-900/20"
+              className="px-4 py-2 rounded-lg border-2 border-gray-600 text-gray-600 dark:text-gray-400 bg-transparent cursor-pointer flex items-center w-full hover:bg-gray-50 dark:hover:bg-gray-900/20"
             >
               <FaFileExport />
               <span className="ml-2">Export</span>
             </button>
             <button
               onClick={closeMobileMenu}
-              className="px-4 py-2 rounded-lg border-2 border-gray-500 text-gray-500 dark:text-gray-400 bg-transparent cursor-pointer flex items-center w-full hover:bg-gray-50 dark:hover:bg-gray-900/20"
+              className="px-4 py-2 rounded-lg border-2 border-gray-600 text-gray-600 dark:text-gray-400 bg-transparent cursor-pointer flex items-center w-full hover:bg-gray-50 dark:hover:bg-gray-900/20"
             >
               <FaFileImport />
               <span className="ml-2">Import</span>
@@ -282,12 +282,12 @@ const TaskManager = () => {
           <div className="hidden md:flex gap-4">
             <button
               onClick={exportData}
-              className="px-4 py-2 rounded-lg border-2 border-gray-500 text-gray-500 dark:text-gray-400 bg-transparent cursor-pointer flex items-center hover:bg-gray-50 dark:hover:bg-gray-900/20"
+              className="px-4 py-2 rounded-lg border-2 border-gray-600 text-gray-600 dark:text-gray-400 bg-transparent cursor-pointer flex items-center hover:bg-gray-50 dark:hover:bg-gray-900/20"
             >
               <FaFileExport />
               <span className="ml-2">Export</span>
             </button>
-            <button className="px-4 py-2 rounded-lg border-2 border-gray-500 text-gray-500 dark:text-gray-400 bg-transparent cursor-pointer flex items-center hover:bg-gray-50 dark:hover:bg-gray-900/20">
+            <button className="px-4 py-2 rounded-lg border-2 border-gray-600 text-gray-600 dark:text-gray-400 bg-transparent cursor-pointer flex items-center hover:bg-gray-50 dark:hover:bg-gray-900/20">
               <FaFileImport />
               <span className="ml-2">Import</span>
               <input type="file" className="hidden" onChange={importData} />

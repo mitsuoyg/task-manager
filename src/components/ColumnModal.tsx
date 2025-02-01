@@ -96,7 +96,7 @@ const ColumnModal: React.FC<ColumnModalProps> = ({
               <button
                 onClick={onDelete}
                 disabled={hasTasksInColumn}
-                className={`px-4 py-2 text-red-500 hover:bg-red-50 dark:hover:bg-gray-700 rounded disabled:opacity-50 flex items-center justify-end gap-2 ${
+                className={`px-4 py-2 text-red-500 hover:bg-red-50 dark:hover:bg-gray-700 rounded disabled:opacity-50 flex items-center gap-2 ml-auto w-max ${
                   hasTasksInColumn ? '' : 'cursor-pointer'
                 }`}
               >
