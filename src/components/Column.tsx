@@ -29,7 +29,7 @@ const Column: React.FC<ColumnProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="min-w-[300px] bg-white dark:bg-gray-800 p-4 rounded-lg shadow"
+      className="min-w-[300px] bg-white dark:bg-gray-800 p-4 rounded-lg shadow flex flex-col"
       style={{ borderTop: `4px solid ${column.color}` }}
     >
       <div className="flex justify-between items-center mb-4">
@@ -53,10 +53,10 @@ const Column: React.FC<ColumnProps> = ({
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="space-y-2"
+            className="space-y-2 grow"
           >
             {column.tasks.length === 0 ? (
-              <div className="text-center py-8 text-gray-400 dark:text-gray-500 text-sm italic">
+              <div className="flex items-center justify-center h-full text-center text-gray-400 dark:text-gray-500 text-sm italic">
                 No tasks yet
               </div>
             ) : (

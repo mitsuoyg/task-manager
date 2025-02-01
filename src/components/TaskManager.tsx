@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 import { motion, AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,6 +8,7 @@ import {
   FaFileExport,
   FaFileImport,
   FaPlus,
+  FaBars,
 } from 'react-icons/fa';
 
 import { TaskType } from './Task';
@@ -37,6 +38,28 @@ const TaskManager = () => {
     const saved = localStorage.getItem('task-manager');
     return saved ? JSON.parse(saved).boardTitle : 'My Task Board';
   });
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        menuButtonRef.current &&
+        !menuButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(
@@ -175,17 +198,100 @@ const TaskManager = () => {
     );
   };
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
       <div className="container mx-auto p-4">
-        <div className="flex flex-wrap items-center justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
           <input
             type="text"
             value={boardTitle}
             onChange={(e) => setBoardTitle(e.target.value)}
             className="text-3xl font-bold bg-transparent dark:text-white mb-4 md:mb-0"
           />
-          <div className="flex gap-4">
+
+          {/* Mobile Menu Button */}
+          <button
+            ref={menuButtonRef}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden fixed top-4 right-4 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
+          >
+            <FaBars />
+          </button>
+
+          {/* Mobile Menu */}
+          <div
+            ref={menuRef}
+            className={`${
+              isMobileMenuOpen ? 'flex' : 'hidden'
+            } md:hidden flex-col fixed right-4 top-16 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 space-y-4 z-50`}
+          >
+            <button
+              onClick={() => {
+                exportData();
+                closeMobileMenu();
+              }}
+              className="px-4 py-2 rounded-lg bg-blue-500 text-white cursor-pointer flex items-center w-full"
+            >
+              <FaFileExport />
+              <span className="ml-2">Export</span>
+            </button>
+            <button
+              onClick={closeMobileMenu}
+              className="px-4 py-2 rounded-lg bg-green-500 text-white cursor-pointer flex items-center w-full"
+            >
+              <FaFileImport />
+              <span className="ml-2">Import</span>
+              <input
+                type="file"
+                className="hidden"
+                onChange={(e) => {
+                  importData(e);
+                  closeMobileMenu();
+                }}
+              />
+            </button>
+            <button
+              onClick={() => {
+                setTheme(theme === 'dark' ? 'light' : 'dark');
+                closeMobileMenu();
+              }}
+              className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white cursor-pointer flex items-center w-full"
+            >
+              {theme === 'dark' ? <FaSun /> : <FaMoon />}
+              <span className="ml-2">
+                {theme === 'dark' ? 'Light' : 'Dark'}
+              </span>
+            </button>
+            <button
+              onClick={() => {
+                setShowNewColumnInput(true);
+                closeMobileMenu();
+              }}
+              className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white cursor-pointer flex items-center w-full"
+            >
+              <FaPlus />
+              <span className="ml-2">Add Column</span>
+            </button>
+          </div>
+
+          {/* Desktop Buttons */}
+          <div className="hidden md:flex gap-4">
+            <button
+              onClick={exportData}
+              className="px-4 py-2 rounded-lg bg-blue-500 text-white cursor-pointer flex items-center"
+            >
+              <FaFileExport />
+              <span className="ml-2">Export</span>
+            </button>
+            <button className="px-4 py-2 rounded-lg bg-green-500 text-white cursor-pointer flex items-center">
+              <FaFileImport />
+              <span className="ml-2">Import</span>
+              <input type="file" className="hidden" onChange={importData} />
+            </button>
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white cursor-pointer flex items-center"
@@ -195,18 +301,6 @@ const TaskManager = () => {
                 {theme === 'dark' ? 'Light' : 'Dark'}
               </span>
             </button>
-            <button
-              onClick={exportData}
-              className="px-4 py-2 rounded-lg bg-blue-500 text-white cursor-pointer flex items-center"
-            >
-              <FaFileExport />
-              <span className="ml-2">Export</span>
-            </button>
-            <label className="px-4 py-2 rounded-lg bg-green-500 text-white cursor-pointer flex items-center">
-              <FaFileImport />
-              <span className="ml-2">Import</span>
-              <input type="file" className="hidden" onChange={importData} />
-            </label>
             <button
               onClick={() => setShowNewColumnInput(true)}
               className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-black dark:text-white cursor-pointer flex items-center"
@@ -240,6 +334,7 @@ const TaskManager = () => {
                 <input
                   autoFocus
                   value={newColumnName}
+                  placeholder="Enter column name"
                   onChange={(e) => setNewColumnName(e.target.value)}
                   onBlur={handleColumnSubmit}
                   onKeyPress={(e) => e.key === 'Enter' && handleColumnSubmit()}
