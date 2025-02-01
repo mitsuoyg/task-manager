@@ -19,3 +19,10 @@ You can deploy your new Vite project with a single command from your terminal us
 ```shell
 $ vercel
 ```
+
+TODO:
+
+- Inconsistent date between modal and board
+- Cannot cancel column creation
+- Drag and Drop does not work
+- Creating a new task has the previous values of another task
