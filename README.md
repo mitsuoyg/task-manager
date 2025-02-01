@@ -22,7 +22,7 @@ $ vercel
 
 TODO:
 
-- Inconsistent date between modal and board
-- Cannot cancel column creation
-- Drag and Drop does not work
-- Creating a new task has the previous values of another task
+- Fix Add task position
+- On click new task, focus on title
+- Responsive
+- border color edit is not showing the current color

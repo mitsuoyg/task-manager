@@ -30,6 +30,7 @@ const Column: React.FC<ColumnProps> = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       className="min-w-[300px] bg-white dark:bg-gray-800 p-4 rounded-lg shadow"
+      style={{ borderTop: `4px solid ${column.color}` }}
     >
       <div className="flex justify-between items-center mb-4">
         <input
@@ -38,7 +39,6 @@ const Column: React.FC<ColumnProps> = ({
             onColumnNameChange(column.id, e.target.value);
           }}
           className="font-bold text-lg bg-transparent dark:text-white"
-          style={{ borderBottom: `3px solid ${column.color}` }}
         />
         <button
           onClick={() => onColumnClick(column)}
@@ -53,16 +53,22 @@ const Column: React.FC<ColumnProps> = ({
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="space-y-2 min-h-[100px]"
+            className="space-y-2"
           >
-            {column.tasks.map((task, index) => (
-              <Task
-                key={task.id}
-                task={task}
-                index={index}
-                onTaskClick={onTaskClick}
-              />
-            ))}
+            {column.tasks.length === 0 ? (
+              <div className="text-center py-8 text-gray-400 dark:text-gray-500 text-sm italic">
+                No tasks yet
+              </div>
+            ) : (
+              column.tasks.map((task, index) => (
+                <Task
+                  key={task.id}
+                  task={task}
+                  index={index}
+                  onTaskClick={onTaskClick}
+                />
+              ))
+            )}
             {provided.placeholder}
           </div>
         )}
