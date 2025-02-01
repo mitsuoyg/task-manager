@@ -35,7 +35,7 @@ const ColumnModal: React.FC<ColumnModalProps> = ({
     );
   };
 
-  const hasTasksInColumn = column?.tasks?.length > 0;
+  const hasTasksInColumn = (column?.tasks?.length ?? 0) > 0;
 
   return (
     <AnimatePresence>

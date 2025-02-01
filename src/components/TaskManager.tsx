@@ -224,7 +224,7 @@ const TaskManager = () => {
                 <Column
                   key={column.id}
                   column={column}
-                  onTaskClick={setSelectedTask}
+                  onTaskClick={(task) => setSelectedTask(task as TaskType)}
                   onColumnClick={setSelectedColumn}
                   onColumnNameChange={handleColumnNameChange}
                 />
@@ -256,7 +256,7 @@ const TaskManager = () => {
         onClose={() => {
           setSelectedTask(null);
         }}
-        task={selectedTask}
+        task={selectedTask as TaskType}
         onSubmit={handleTaskSubmit}
         columns={columns}
         deleteTask={deleteTask}
