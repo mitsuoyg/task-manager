@@ -24,8 +24,7 @@ const initialColumns = [
       {
         id: uuidv4(),
         title: '🚀 Welcome to Task Manager!',
-        description:
-          'Start by adding your tasks here. Click on a task to edit or delete it.',
+        description: '',
         columnId: 'todo',
       },
     ],
