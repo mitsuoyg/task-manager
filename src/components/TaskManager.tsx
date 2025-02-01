@@ -42,6 +42,7 @@ const TaskManager = () => {
 
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -198,6 +199,10 @@ const TaskManager = () => {
     );
   };
 
+  const handleImportClick = () => {
+    fileInputRef.current?.click();
+  };
+
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
@@ -211,6 +216,15 @@ const TaskManager = () => {
             value={boardTitle}
             onChange={(e) => setBoardTitle(e.target.value)}
             className="text-3xl font-bold bg-transparent dark:text-white mb-4 md:mb-0"
+          />
+          <input
+            ref={fileInputRef}
+            type="file"
+            className="hidden"
+            onChange={(e) => {
+              importData(e);
+              closeMobileMenu();
+            }}
           />
 
           {/* Mobile Menu Button */}
@@ -240,19 +254,14 @@ const TaskManager = () => {
               <span className="ml-2">Export</span>
             </button>
             <button
-              onClick={closeMobileMenu}
+              onClick={() => {
+                handleImportClick();
+                closeMobileMenu();
+              }}
               className="px-4 py-2 rounded-lg border-2 border-gray-600 text-gray-600 dark:text-gray-400 bg-transparent cursor-pointer flex items-center w-full hover:bg-gray-50 dark:hover:bg-gray-900/20"
             >
               <FaFileImport />
               <span className="ml-2">Import</span>
-              <input
-                type="file"
-                className="hidden"
-                onChange={(e) => {
-                  importData(e);
-                  closeMobileMenu();
-                }}
-              />
             </button>
             <button
               onClick={() => {
@@ -287,10 +296,12 @@ const TaskManager = () => {
               <FaFileExport />
               <span className="ml-2">Export</span>
             </button>
-            <button className="px-4 py-2 rounded-lg border-2 border-gray-600 text-gray-600 dark:text-gray-400 bg-transparent cursor-pointer flex items-center hover:bg-gray-50 dark:hover:bg-gray-900/20">
+            <button
+              onClick={handleImportClick}
+              className="px-4 py-2 rounded-lg border-2 border-gray-600 text-gray-600 dark:text-gray-400 bg-transparent cursor-pointer flex items-center hover:bg-gray-50 dark:hover:bg-gray-900/20"
+            >
               <FaFileImport />
               <span className="ml-2">Import</span>
-              <input type="file" className="hidden" onChange={importData} />
             </button>
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
