@@ -56,7 +56,7 @@ const Column: React.FC<ColumnProps> = ({
             className="space-y-2 grow"
           >
             {column.tasks.length === 0 ? (
-              <div className="flex items-center justify-center h-full text-center text-gray-400 dark:text-gray-500 text-sm italic">
+              <div className="flex items-center justify-center h-full text-center text-gray-400 dark:text-gray-500 text-sm italic min-h-56">
                 No tasks yet
               </div>
             ) : (
