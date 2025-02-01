@@ -1,28 +1,56 @@
-# React + TypeScript + Vite
+# Task Board: Drag-and-Drop Task Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Live Demo](https://img.shields.io/badge/Live_Demo-000?style=for-the-badge)](https://mitsuo-task-board.vercel.app/)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github)](https://github.com/mitsuoyg/task-manager)
 
-While this project uses React, Vite supports many popular JS frameworks. [See all the supported frameworks](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+A dynamic task management application with intuitive drag-and-drop functionality and customizable workflows.
 
-## Deploy Your Own
+## Features
 
-Deploy your own Vite project with Vercel.
+- 🖱️ Drag-and-Drop Interface: Easily move tasks between columns
+- 🎨 Customizable Workflow: Create, rename, and organize task columns
+- 🌓 Theme Switching: Light/dark mode support
+- 📁 Data Portability: Import/export task boards via JSON
+- 📱 Responsive Design: Works seamlessly across devices
+- 💾 Local Storage: Automatic data persistence
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/vite-react&template=vite-react)
+## Tech Stack
 
-_Live Example: https://vite-react-example.vercel.app_
+**Frontend:**
 
-### Deploying From Your Terminal
+- React.js + TypeScript
+- Tailwind CSS + Framer Motion
+- @hello-pangea/dnd (Beautiful DnD)
 
-You can deploy your new Vite project with a single command from your terminal using [Vercel CLI](https://vercel.com/download):
+**State Management:**
 
-```shell
-$ vercel
+- Local storage persistence
+- React Context API
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/mitsuoyg/task-manager.git
 ```
 
-TODO:
+2. Install dependencies:
 
-- Fix Add task position
-- On click new task, focus on title
-- Responsive
-- border color edit is not showing the current color
+```bash
+npm install
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+## Usage
+
+- **Create Tasks:** Click "+ Add Task" in any column.
+- **Organize:** Drag tasks between columns.
+- **Customize:** Right-click columns to rename or delete them.
+- **Themes:** Toggle light/dark mode in the header.
+- **Data Management:** Use import/export options in the settings menu.

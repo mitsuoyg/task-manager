@@ -17,7 +17,20 @@ import TaskModal from './TaskModal';
 import ColumnModal from './ColumnModal';
 
 const initialColumns = [
-  { id: 'todo', name: 'Todo', tasks: [], color: '#3b82f6' },
+  {
+    id: 'todo',
+    name: 'Todo',
+    tasks: [
+      {
+        id: uuidv4(),
+        title: '🚀 Welcome to Task Manager!',
+        description:
+          'Start by adding your tasks here. Click on a task to edit or delete it.',
+        columnId: 'todo',
+      },
+    ],
+    color: '#3b82f6',
+  },
   { id: 'inProgress', name: 'In Progress', tasks: [], color: '#f59e0b' },
   { id: 'done', name: 'Done', tasks: [], color: '#10b981' },
 ];
