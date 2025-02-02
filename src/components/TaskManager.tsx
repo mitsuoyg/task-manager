@@ -126,14 +126,32 @@ const TaskManager = () => {
 
   const handleTaskSubmit = (taskData: TaskType) => {
     if (taskData.id) {
-      setColumns((cols) =>
-        cols.map((col) => ({
-          ...col,
-          tasks: col.tasks.map((t) =>
-            t.id === taskData.id ? { ...t, ...taskData } : t
-          ),
-        }))
-      );
+      setColumns((cols) => {
+        const updatedCols = cols.map((col) => {
+          if (col.id === taskData.columnId) {
+            return {
+              ...col,
+              tasks: col.tasks.map((t) =>
+                t.id === taskData.id ? { ...t, ...taskData } : t
+              ),
+            };
+          } else {
+            return {
+              ...col,
+              tasks: col.tasks.filter((t) => t.id !== taskData.id),
+            };
+          }
+        });
+
+        const targetCol = updatedCols.find(
+          (col) => col.id === taskData.columnId
+        );
+        if (targetCol && !targetCol.tasks.some((t) => t.id === taskData.id)) {
+          targetCol.tasks.push(taskData);
+        }
+
+        return updatedCols;
+      });
     } else {
       const newTask = {
         ...taskData,
