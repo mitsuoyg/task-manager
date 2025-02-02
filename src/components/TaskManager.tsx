@@ -9,12 +9,14 @@ import {
   FaFileImport,
   FaPlus,
   FaBars,
+  FaGithub,
 } from 'react-icons/fa';
 
 import { TaskType } from './Task';
 import Column, { ColumnType } from './Column';
 import TaskModal from './TaskModal';
 import ColumnModal from './ColumnModal';
+import logo from '../assets/logo.png';
 
 const initialColumns = [
   {
@@ -255,6 +257,24 @@ const TaskManager = () => {
               isMobileMenuOpen ? 'flex' : 'hidden'
             } md:hidden flex-col fixed right-4 top-16 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 space-y-4 z-50`}
           >
+            <div className="flex">
+              <a
+                href="https://github.com/mitsuoyg/task-manager"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-lg text-black dark:text-white cursor-pointer flex justify-center w-full"
+              >
+                <FaGithub size={24} />
+              </a>
+              <a
+                href="https://mitsuo.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-lg text-black dark:text-white cursor-pointer flex justify-center w-full"
+              >
+                <img src={logo} alt="About Me" className="w-6 h-6" />
+              </a>
+            </div>
             <button
               onClick={() => {
                 exportData();
@@ -301,6 +321,24 @@ const TaskManager = () => {
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex gap-4">
+            <div className="flex">
+              <a
+                href="https://github.com/mitsuoyg/task-manager"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-lg text-black dark:text-white cursor-pointer flex items-center"
+              >
+                <FaGithub size={24} />
+              </a>
+              <a
+                href="https://mitsuo.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-lg text-black dark:text-white cursor-pointer flex items-center"
+              >
+                <img src={logo} alt="About Me" className="w-6 h-6" />
+              </a>
+            </div>
             <button
               onClick={exportData}
               className="px-4 py-2 rounded-lg border-2 border-gray-600 text-gray-600 dark:text-gray-400 bg-transparent cursor-pointer flex items-center hover:bg-gray-50 dark:hover:bg-gray-900/20"
